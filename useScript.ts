@@ -88,7 +88,6 @@ function useScript(
     scriptNode.addEventListener('load', setStateFromEvent)
     scriptNode.addEventListener('error', setStateFromEvent)
 
-    // Remove event listeners on cleanup
     return () => {
       if (scriptNode) {
         scriptNode.removeEventListener('load', setStateFromEvent)
