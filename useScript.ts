@@ -6,7 +6,6 @@ export interface UseScriptOptions {
   removeOnUnmount?: boolean
 }
 
-// Cached script statuses
 const cachedScriptStatuses: Record<string, UseScriptStatus | undefined> = {}
 
 function getScriptNode(src: string) {
@@ -33,7 +32,6 @@ function useScript(
     }
 
     if (typeof window === 'undefined') {
-      // SSR Handling - always return 'loading'
       return 'loading'
     }
 
@@ -47,18 +45,14 @@ function useScript(
 
     const cachedScriptStatus = cachedScriptStatuses[src]
     if (cachedScriptStatus === 'ready' || cachedScriptStatus === 'error') {
-      // If the script is already cached, set its status immediately
       setStatus(cachedScriptStatus)
       return
     }
 
-    // Fetch existing script element by src
-    // It may have been added by another instance of this hook
     const script = getScriptNode(src)
     let scriptNode = script.node
 
     if (!scriptNode) {
-      // Create script element and add it to document body
       scriptNode = document.createElement('script')
       scriptNode.src = src
       scriptNode.async = true
