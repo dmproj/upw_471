@@ -75,7 +75,7 @@ function useScript(
       setStatus(script.status ?? cachedScriptStatus ?? 'loading')
     }
 
-    // Script event handler to update status in state
+    //  event handler to update status in state
     // Note: Even if the script already exists we still need to add
     // event handlers to update the state for *this* hook instance.
     const setStateFromEvent = (event: Event) => {
